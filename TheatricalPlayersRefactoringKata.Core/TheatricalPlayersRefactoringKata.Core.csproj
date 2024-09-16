@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Models\TheatricalPlayersRefactoringKata.Models.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Userful\TheatricalPlayersRefactoringKata.Userful.csproj" />
+  </ItemGroup>
+
 </Project>

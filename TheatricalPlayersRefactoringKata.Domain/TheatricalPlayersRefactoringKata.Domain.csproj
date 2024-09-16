@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Core\TheatricalPlayersRefactoringKata.Core.csproj" />
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Models\TheatricalPlayersRefactoringKata.Models.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Userful\TheatricalPlayersRefactoringKata.Userful.csproj" />
   </ItemGroup>
 
 </Project>

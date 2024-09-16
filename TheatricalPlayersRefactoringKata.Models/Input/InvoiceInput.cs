@@ -1,6 +1,7 @@
-using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace TheatricalPlayersRefactoringKata;
+
 
 public class InvoiceInput
 {
@@ -9,6 +10,7 @@ public class InvoiceInput
 
     public string Customer { get => _customer; set => _customer = value; }
     public List<PerformanceDto> Performances { get => _performances; set => _performances = value; }
+
 
     public InvoiceInput(string customer, List<PerformanceDto> performance)
     {
