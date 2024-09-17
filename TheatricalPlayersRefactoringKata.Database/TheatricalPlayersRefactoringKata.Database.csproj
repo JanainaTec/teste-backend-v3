@@ -19,4 +19,8 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.29" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Models\TheatricalPlayersRefactoringKata.Models.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,23 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TheatricalPlayersRefactoringKata.Database.Models;
 using TheatricalPlayersRefactoringKata.Domain.Implementation.Interface;
+using TheatricalPlayersRefactoringKata.Models.Dto;
 using TheatricalPlayersRefactoringKata.Models.Input;
 
 namespace TheatricalPlayersRefactoringKata.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PrintController : Controller
+    public class StatementController : Controller
     {
         private readonly IStatementPrinter _statementPrinter;
-        public PrintController(
+        public StatementController(
           IStatementPrinter statementPrinter)
         {
             _statementPrinter = statementPrinter;
         }
 
-
-        [HttpPost("StatemenText")]
-        public IActionResult OnPostText([FromBody] StatementPrinterInput model)
+        [HttpPost("CreateXmlFile")]
+        public IActionResult OnPostCreateXml([FromBody] StatementPrinterInput model)
         {
             try
             {
@@ -27,7 +28,7 @@ namespace TheatricalPlayersRefactoringKata.Presentation.Controllers
                     Performances = model.Invoice.Performances,
                 };
 
-                var result = _statementPrinter.PrintStatement(invoice, model.Plays, "TextString");
+                var result = _statementPrinter.CreateXmlFile(invoice, model.Plays);
                 return Ok(result);
             }
             catch (Exception e)
@@ -36,24 +37,20 @@ namespace TheatricalPlayersRefactoringKata.Presentation.Controllers
             }
         }
 
-        [HttpPost("StatementXml")]
-        public IActionResult OnPostXml([FromBody] StatementPrinterInput model)
+        [HttpGet("All")]
+        [ProducesDefaultResponseType(typeof(List<StatementDto>))]
+        public IActionResult OnGetAllStatement()
         {
             try
             {
-                InvoiceInput invoice = new InvoiceInput(model.Invoice.Customer, model.Invoice.Performances)
-                {
-                    Customer = model.Invoice.Customer,
-                    Performances = model.Invoice.Performances,
-                };
-
-                var result = _statementPrinter.PrintStatement(invoice, model.Plays, "XmlString");
+                var result = _statementPrinter.GetAllStatement();
                 return Ok(result);
             }
             catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status400BadRequest, e.Message);
             }
+
         }
     }
 }

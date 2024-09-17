@@ -3,7 +3,11 @@ using ApprovalTests.Reporters;
 using Moq;
 using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Core.Rules;
+using TheatricalPlayersRefactoringKata.Database;
+using TheatricalPlayersRefactoringKata.Database.Interface;
+using TheatricalPlayersRefactoringKata.Database.Repository;
 using TheatricalPlayersRefactoringKata.Domain;
+using TheatricalPlayersRefactoringKata.Models.Dto;
 using TheatricalPlayersRefactoringKata.Models.Enums;
 using Xunit;
 
@@ -11,6 +15,17 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 
 public class StatementPrinterTests
 {
+    private readonly Mock<StatementPrinterRules> _mockStatementPrinterRules;
+    private readonly Mock<IStatemnetRepository> _mockStatementRepository;
+    private readonly StatementPrinterService _statementPrinterService;
+
+    public StatementPrinterTests()
+    {
+        _mockStatementPrinterRules = new Mock<StatementPrinterRules>();
+        _mockStatementRepository = new Mock<IStatemnetRepository>();
+        _statementPrinterService = new StatementPrinterService(_mockStatementPrinterRules.Object, _mockStatementRepository.Object);
+    }
+
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestTextStatementExample()
@@ -36,12 +51,11 @@ public class StatementPrinterTests
             }
         );
 
-        var mockRules = new Mock<StatementPrinterRules>();
-        var statementPrinter = new StatementPrinter(mockRules.Object);
-        var result = statementPrinter.PrintStatement(invoice, plays, "TextString");
+        var statement = new StatementDto(); 
+        var result = _statementPrinterService.PrintStatement(invoice, plays, "TextString");
 
         Approvals.Verify(result);
-
+        
     }
 
     [Fact]
@@ -69,11 +83,11 @@ public class StatementPrinterTests
             }
         );
 
-        var mockRules = new Mock<StatementPrinterRules>();
-        var statementPrinter = new StatementPrinter(mockRules.Object);
-        var result = statementPrinter.PrintStatement(invoice, plays, "XmlString");
+
+        var statement = new StatementDto();
+        var result = _statementPrinterService.PrintStatement(invoice, plays, "XmlString");
 
         Approvals.Verify(result);
-
     }
+
 }

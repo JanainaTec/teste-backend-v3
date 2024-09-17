@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using TheatricalPlayersRefactoringKata.Core.Rules;
 using TheatricalPlayersRefactoringKata.Database;
+using TheatricalPlayersRefactoringKata.Database.Repository;
 using TheatricalPlayersRefactoringKata.Domain;
-using TheatricalPlayersRefactoringKata.Domain.Implementation;
+using TheatricalPlayersRefactoringKata.Domain.Implementation.Interface;
 
 namespace TheatricalPlayersRefactoringKata.Presentation
 {
@@ -23,9 +24,13 @@ namespace TheatricalPlayersRefactoringKata.Presentation
                 AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddScoped<StatementPrinter>();
+            builder.Services.AddScoped<StatementPrinterService>();
             builder.Services.AddScoped<StatementPrinterRules>();
-            builder.Services.AddScoped<IStatementPrinter, StatementPrinter>();
+            builder.Services.AddScoped<IStatementPrinter, StatementPrinterService>(); 
+            builder.Services.AddScoped<StatementRepository>();
+            builder.Services.AddScoped<PlayService>();
+            builder.Services.AddScoped<PlayRepository>();
+            builder.Services.AddScoped<IPlayService, PlayService>();
 
             var app = builder.Build();
 

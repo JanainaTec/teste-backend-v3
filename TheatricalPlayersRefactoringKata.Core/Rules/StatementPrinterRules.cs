@@ -1,10 +1,10 @@
 ﻿using System.Globalization;
 using System.Text;
-using System.Xml.Serialization;
 using System.Xml;
+using System.Xml.Serialization;
 using TheatricalPlayersRefactoringKata.Models.Dto;
-using TheatricalPlayersRefactoringKata.Userful.StringWriterEncoding;
 using TheatricalPlayersRefactoringKata.Models.Enums;
+using TheatricalPlayersRefactoringKata.Userful.StringWriterEncoding;
 
 namespace TheatricalPlayersRefactoringKata.Core.Rules
 {
@@ -16,7 +16,6 @@ namespace TheatricalPlayersRefactoringKata.Core.Rules
             var volumeCredits = 0;
             var statement = new StatementDto();
             statement.Customer = invoice.Customer;
-            var result = "";
             var itensList = new List<ItemDto>();
 
             foreach (var perf in invoice.Performances)
@@ -50,7 +49,7 @@ namespace TheatricalPlayersRefactoringKata.Core.Rules
                     AmountOwed = Convert.ToDecimal(thisAmount / 100.00),
                     EarnedCredits = Math.Max(perf.Audience - 30, 0),
                     Seats = perf.Audience,
-                    play = play.Name
+                    Play = play.Name
                 };
 
 
@@ -72,7 +71,7 @@ namespace TheatricalPlayersRefactoringKata.Core.Rules
 
             return statement;
         }
-        
+
         public int AmountForTypeTragedy(int audience, int thisAmount)
         {
             if (audience > 30)
@@ -100,7 +99,7 @@ namespace TheatricalPlayersRefactoringKata.Core.Rules
 
             foreach (var item in statement.Items)
             {
-                result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", item.play, item.AmountOwed, item.Seats);
+                result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", item.Play, item.AmountOwed, item.Seats);
                 totalAmount += item.AmountOwed;
                 totalCredits += item.EarnedCredits;
             }
