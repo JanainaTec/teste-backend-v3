@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using TheatricalPlayersRefactoringKata.Core.Rules;
+using TheatricalPlayersRefactoringKata.Database;
 using TheatricalPlayersRefactoringKata.Domain;
 using TheatricalPlayersRefactoringKata.Domain.Implementation;
 
@@ -16,6 +18,10 @@ namespace TheatricalPlayersRefactoringKata.Presentation
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddEntityFrameworkNpgsql().
+                AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped<StatementPrinter>();
             builder.Services.AddScoped<StatementPrinterRules>();

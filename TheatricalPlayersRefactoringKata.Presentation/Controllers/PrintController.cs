@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.Swagger.Annotations;
+﻿using Microsoft.AspNetCore.Mvc;
 using TheatricalPlayersRefactoringKata.Domain.Implementation;
 using TheatricalPlayersRefactoringKata.Models.Input;
 
@@ -26,7 +24,7 @@ namespace TheatricalPlayersRefactoringKata.Presentation.Controllers
                 InvoiceInput invoice = new InvoiceInput(model.Invoice.Customer, model.Invoice.Performances)
                 {
                     Customer = model.Invoice.Customer,
-                    Performances = model.Invoice.Performances,  
+                    Performances = model.Invoice.Performances,
                 };
 
                 var result = _statementPrinter.PrintStatement(invoice, model.Plays, "TextString");
@@ -38,7 +36,7 @@ namespace TheatricalPlayersRefactoringKata.Presentation.Controllers
             }
         }
 
-        [HttpPost("StatemenXml")]
+        [HttpPost("StatementXml")]
         public IActionResult OnPostXml([FromBody] StatementPrinterInput model)
         {
             try

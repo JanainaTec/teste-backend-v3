@@ -7,12 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.33" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.33">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.Core" Version="5.6.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Core\TheatricalPlayersRefactoringKata.Core.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Database\TheatricalPlayersRefactoringKata.Database.csproj" />
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Models\TheatricalPlayersRefactoringKata.Models.csproj" />
   </ItemGroup>
 
 </Project>
