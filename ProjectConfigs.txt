@@ -1,0 +1,21 @@
+## Migrations
+
+Criar uma migration nova e atualizar o banco de dados:
+Deixe setado o projeto API como projeto principal, vá em "Package Manager Console" e digite o código abaixo:
+
+```
+    Add-Migration -OutputDir Migrations [NomeMigration -Project TheatricalPlayersRefactoringKata.Database -StartupProject TheatricalPlayersRefactoringKata.Presentation -Context ApplicationDbContext
+
+	Update-Database -Project heatricalPlayersRefactoringKata.Database -StartupProject TheatricalPlayersRefactoringKata.Presentation
+```
+
+
+## Conection String
+
+Vá em Presentation no arquivo appsettings.json e adicione:
+
+```
+     "ConnectionStrings": {
+        "DefaultConnection": "Host=localhost;Port=5432;Pooling=true;Database=TheatricalDb;USER ID=[seu usuario];Password=[sua senha]"
+        }
+```

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TheatricalPlayersRefactoringKata.Core.Rules;
 using TheatricalPlayersRefactoringKata.Database;
+using TheatricalPlayersRefactoringKata.Database.Interface;
 using TheatricalPlayersRefactoringKata.Database.Repository;
 using TheatricalPlayersRefactoringKata.Domain;
 using TheatricalPlayersRefactoringKata.Domain.Implementation.Interface;
@@ -27,7 +28,7 @@ namespace TheatricalPlayersRefactoringKata.Presentation
             builder.Services.AddScoped<StatementPrinterService>();
             builder.Services.AddScoped<StatementPrinterRules>();
             builder.Services.AddScoped<IStatementPrinter, StatementPrinterService>(); 
-            builder.Services.AddScoped<StatementRepository>();
+            builder.Services.AddScoped<IStatemnetRepository, StatementRepository>();
             builder.Services.AddScoped<PlayService>();
             builder.Services.AddScoped<PlayRepository>();
             builder.Services.AddScoped<IPlayService, PlayService>();
